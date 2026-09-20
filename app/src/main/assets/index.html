@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>وش نتعلم اليوم؟</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;
+ font-family:Arial,sans-serif;
+ background:linear-gradient(180deg,#fbf7ff,#f6f0ff);
+ color:#302b3f;
+}
+.wrap{max-width:520px;margin:auto;padding:22px 16px 90px}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.brand{font-weight:bold;font-size:21px}
+.xp{background:white;border:1px solid #eadff9;padding:8px 12px;border-radius:18px;font-size:13px}
+.hero{
+ background:linear-gradient(135deg,#eadcff,#f9dff0);
+ border-radius:28px;padding:25px 20px;text-align:center;
+ box-shadow:0 10px 30px #cbbbe633
+}
+.gift{font-size:58px}
+.hero h1{margin:8px 0;font-size:25px}
+.hero p{color:#6f667d}
+button{border:0;font-weight:bold;cursor:pointer}
+.surprise{
+ background:linear-gradient(135deg,#8e6be8,#b36fe5);
+ color:white;padding:14px 25px;border-radius:18px;font-size:16px
+}
+.stats{display:flex;gap:10px;margin:14px 0}
+.stat{
+ flex:1;background:white;border:1px solid #eee3fa;
+ border-radius:18px;padding:13px;text-align:center
+}
+.num{font-size:20px;font-weight:bold}
+.small{font-size:12px;color:#81768e}
+h2{font-size:18px;margin:24px 3px 12px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.cat{
+ background:white;border:1px solid #eee3fa;border-radius:20px;
+ padding:17px;text-align:right;min-height:100px
+}
+.cat span{font-size:28px}
+.cat b{display:block;margin-top:9px}
+.challenge{
+ display:none;background:white;border:1px solid #eadff9;
+ border-radius:24px;padding:18px;margin-top:14px
+}
+.challenge.show{display:block}
+.answer{
+ width:100%;padding:12px;border:1px solid #ddd0ee;
+ border-radius:14px;margin:12px 0;font-size:16px
+}
+.check{
+ background:#6f56c8;color:white;padding:11px 18px;border-radius:13px
+}
+.credit{text-align:center;color:#9a8ca8;font-size:12px;margin-top:28px}
+.bottom{
+ position:fixed;bottom:0;left:0;right:0;background:#ffffffee;
+ display:flex;justify-content:space-around;padding:10px
+}
+.nav{background:none;color:#777;font-size:11px}
+.nav span{display:block;font-size:21px}
+</style>
+</head>
+
+<body>
+
+<div class="wrap">
+
+<div class="top">
+<div class="brand">وش نتعلم اليوم؟ ♡</div>
+<div class="xp">✨ 120 XP</div>
+</div>
+
+<section class="hero">
+<div class="gift">🎁</div>
+<h1>وش راح تكتشف اليوم؟</h1>
+<p>اضغط وخلي المفاجأة تختارلك تحديك ♡</p>
+<button class="surprise" onclick="newChallenge()">فاجئني! 🎁</button>
+</section>
+
+<div class="stats">
+<div class="stat">
+<div class="num" id="done">12</div>
+<div class="small">تحديات مكتملة</div>
+</div>
+<div class="stat">
+<div class="num">4</div>
+<div class="small">أيام متتالية</div>
+</div>
+</div>
+
+<div id="challenge" class="challenge">
+<b id="ctitle"></b>
+<p id="cquestion"></p>
+<input id="answer" class="answer" placeholder="اكتبي إجابتك هنا...">
+<button class="check" onclick="checkAnswer()">تحققي من الإجابة</button>
+<p id="result"></p>
+</div>
+
+<h2>وش حاب تتعلم؟ 👇</h2>
+
+<div class="grid">
+
+<button class="cat" onclick="newChallenge()">
+<span>🇺🇸</span><b>لغات</b>
+</button>
+
+<button class="cat" onclick="newChallenge()">
+<span>🧠</span><b>ثقافة واكتشاف</b>
+</button>
+
+<button class="cat" onclick="newChallenge()">
+<span>🧩</span><b>ألغاز</b>
+</button>
+
+<button class="cat" onclick="newChallenge()">
+<span>🎨</span><b>إبداع</b>
+</button>
+
+</div>
+
+<div class="credit">— ♡ By imane Touaitia ♡ —</div>
+
+</div>
+
+<nav class="bottom">
+<button class="nav" onclick="window.scrollTo(0,0)">
+<span>⌂</span>الرئيسية
+</button>
+<button class="nav" onclick="newChallenge()">
+<span>🎁</span>تحدي
+</button>
+<button class="nav">
+<span>🏆</span>إنجازات
+</button>
+<button class="nav">
+<span>♡</span>حسابي
+</button>
+</nav>
+
+<script>
+
+const challenges=[
+["🧠 معلومة","ما هو الكوكب المعروف بالكوكب الأحمر؟","المريخ"],
+["🇺🇸 English","ما معنى كلمة guest بالعربية؟","ضيف"],
+["🧩 لغز","شيء كلما أخذت منه كبر، ما هو؟","الحفرة"],
+["🌍 جغرافيا","ما هي عاصمة فرنسا؟","باريس"]
+];
+
+function newChallenge(){
+
+let c=challenges[Math.floor(Math.random()*challenges.length)];
+
+document.getElementById("challenge").classList.add("show");
+
+document.getElementById("ctitle").textContent=c[0];
+
+document.getElementById("cquestion").textContent=c[1];
+
+document.getElementById("challenge").dataset.answer=c[2];
+
+document.getElementById("answer").value="";
+
+document.getElementById("result").textContent="";
+
+document.getElementById("challenge").scrollIntoView({
+behavior:"smooth"
+});
+
+}
+
+function checkAnswer(){
+
+let answer=document.getElementById("answer").value.trim();
+
+let correct=document.getElementById("challenge").dataset.answer;
+
+if(answer===correct){
+
+document.getElementById("result").textContent="🎉 صح! +10 XP";
+
+let n=document.getElementById("done");
+
+n.textContent=parseInt(n.textContent)+1;
+
+}else{
+
+document.getElementById("result").textContent="حاولي مرة أخرى ♡";
+
+}
+
+}
+
+</script>
+
+</body>
+  </html>
